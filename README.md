@@ -5,22 +5,32 @@
 [![License](https://img.shields.io/cocoapods/l/ATTutorialController.svg?style=flat)](http://cocoadocs.org/docsets/ATTutorialController)
 [![Platform](https://img.shields.io/cocoapods/p/ATTutorialController.svg?style=flat)](http://cocoadocs.org/docsets/ATTutorialController)
 
+A simple to use tutorial controller, highlight style.
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## Dependencies
+
+This framework uses Facebooks shimmer view for the swipe message. 
 
 ## Installation
+
+### Cocoapods:
 
 ATTutorialController is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod "ATTutorialController"
 
+### Source
+
+Copy the classes inside Pos/Classes to your xcode project.
+
 ## Author
 
-Afonso Tsukamoto, atsukamoto@faber-ventures.com
+Afonso Tsukamoto, afonsotsukamoto@gmail.com, [@TsukAfonso](https://twitter.com/TsukAfonso)
 
 ## License
 
