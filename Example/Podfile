@@ -1,0 +1,13 @@
+target 'ATTutorialController', :exclusive => true do
+  pod "ATTutorialController", :path => "../"
+  pod 'Shimmer', '~> 1.0.1'
+end
+
+target 'Tests', :exclusive => true do
+  pod "ATTutorialController", :path => "../"
+
+  pod 'Specta', '~> 0.2.1'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end
