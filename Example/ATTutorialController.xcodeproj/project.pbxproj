@@ -21,6 +21,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		617E24D619B8252B0008BAA4 /* screenshot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 617E24D519B8252B0008BAA4 /* screenshot.gif */; };
 		A1369C726B714BAE88D90D7B /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8323ED1A6D5419AB79AE157 /* libPods-Tests.a */; };
 		A537027BE47648DB81EAA36F /* libPods-ATTutorialController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4AB2B6DB874545BA621A68 /* libPods-ATTutorialController.a */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		6034F4D5E60D41F5864810FF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		617E24D519B8252B0008BAA4 /* screenshot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = screenshot.gif; path = ATTutorialController/screenshot.gif; sourceTree = "<group>"; };
 		A3D3F955422A4F9AAD00EA24 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CF85A494CADE47AF93DE6973 /* Pods-ATTutorialController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATTutorialController.xcconfig"; path = "Pods/Pods-ATTutorialController.xcconfig"; sourceTree = "<group>"; };
 		DA4AB2B6DB874545BA621A68 /* libPods-ATTutorialController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ATTutorialController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				617E24D519B8252B0008BAA4 /* screenshot.gif */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* ATTutorialController */,
 				6003F5B5195388D20070C39A /* Tests */,
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617E24D619B8252B0008BAA4 /* screenshot.gif in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,

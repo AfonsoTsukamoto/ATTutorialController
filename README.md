@@ -21,7 +21,7 @@ it, simply add the following line to your Podfile:
 
 ### Source
 
-Copy the classes inside Pos/Classes to your xcode project.
+Copy the classes inside Pod/Classes to your xcode project.
 
 ## Author
 
