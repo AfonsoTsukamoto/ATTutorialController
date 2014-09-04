@@ -2,6 +2,8 @@
 
 A simple to use tutorial controller, highlight style.
 
+![ATTutorialController Gif](/Example/ATTutorialController/screenshot.gif "ATTutorialController Gif")
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
