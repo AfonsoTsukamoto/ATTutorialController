@@ -106,8 +106,8 @@
 
 -(FBShimmeringView *)labelForTutorialSwipe{
     CGRect frame = (CGRect){
-        {20.0, ((self.window.frame.size.height) - (60.0 + 20.0))}, // 60 = height of the label. 20 is the margin to the bottom.
-        {280.0, 60.0}
+        {0, ((self.window.frame.size.height) - (60.0 + 20.0))}, // 60 = height of the label. 20 is the margin to the bottom.
+        {self.window.frame.size.width, 60.0}
     };
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:18.0]];
@@ -265,6 +265,8 @@
         {self.window.frame.size.width, self.tutorialLabel.frame.origin.y},
         {self.tutorialLabel.frame.size.width, self.tutorialLabel.frame.size.height}
     }];
+    
+    [self.tutorialLabel setNumberOfLines:0];
     
     [self animateTutorialAppearWithPendingAnimation:^{
         [self.tutorialLabel setFrame:(CGRect){
