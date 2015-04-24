@@ -74,6 +74,13 @@
     [self.window setTouchesDelegate:self];
     [self.window setMultipleTouchEnabled:YES];
     
+    // Adds a custom mapview with all types of pins
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_BackgroundTutorial.jpg"]];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [imageView setFrame:[self windowFrame]];
+    [self.window addSubview:imageView];
+    imageView = nil;
+    
     // Add a background view to the tutorial
     self.backgroundView = [[UIView alloc] initWithFrame:[self windowFrame]];
     self.backgroundView.alpha = 0;
@@ -94,8 +101,8 @@
 }
 
 -(UILabel *)labelForTutorialWithText:(NSString *)title{
-    UILabel *label = [[UILabel alloc]initWithFrame: self.hasLabelPosition ? self.labelPosition : CGRectMake(20.0, 300.0, 280.0, 100.0)];
-    [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:18.0]];
+    UILabel *label = [[UILabel alloc]initWithFrame: self.hasLabelPosition ? self.labelPosition : CGRectMake(30, ((self.window.frame.size.height) - 150.0), self.window.frame.size.width - 60, 100.0)]; // Vitor - Fixed label position
+    [label setFont:[UIFont fontWithName:@"Nexa Light" size:16.0]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor whiteColor]];
     [label setText:title];
@@ -106,11 +113,11 @@
 
 -(FBShimmeringView *)labelForTutorialSwipe{
     CGRect frame = (CGRect){
-        {20.0, ((self.window.frame.size.height) - (60.0 + 20.0))}, // 60 = height of the label. 20 is the margin to the bottom.
-        {280.0, 60.0}
+        {0, ((self.window.frame.size.height) - (60.0 + 15.0))}, // 60 = height of the label. 20 is the margin to the bottom.
+        {self.window.frame.size.width, 60.0} // Vitor - Fixed label position
     };
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:18.0]];
+    [label setFont:[UIFont fontWithName:@"Nexa Light" size:16.0]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor whiteColor]];
     [label setText:self.shimmerLabelText];
@@ -259,6 +266,8 @@
     
     self.shimmerLabel = [self labelForTutorialSwipe];
     [self.backgroundView addSubview:self.shimmerLabel];
+    
+    [self.tutorialLabel setNumberOfLines:0];
     
     CGFloat prevX = self.tutorialLabel.frame.origin.x;
     [self.tutorialLabel setFrame:(CGRect){
