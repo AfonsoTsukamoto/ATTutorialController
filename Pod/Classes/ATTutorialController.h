@@ -38,5 +38,5 @@
 
 -(void)showTutorialWithFramesAndStringsBlock:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion;
 
--(void)showTutorialWithFramesAndStringsBlock:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits;
+-(void)showTutorialWithFramesAndStringsAndBackgroundImage:(NSString *)background Block:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits;
 @end

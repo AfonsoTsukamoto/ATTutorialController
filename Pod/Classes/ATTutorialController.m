@@ -13,6 +13,7 @@
 @interface ATTutorialController()<UIWindowTouchesProtocol>
 @property (nonatomic, strong) UIWindow *mainWindow;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) CAShapeLayer *mask;
 @property (nonatomic, strong) UILabel *tutorialLabel;
 @property (nonatomic, strong) FBShimmeringView *shimmerLabel;
@@ -27,6 +28,8 @@
 @property (nonatomic, readwrite) BOOL firstTouchForTutorialStart;
 @property (nonatomic, readwrite) BOOL waitsForTouches;
 @property (nonatomic, readwrite) BOOL hasLabelPosition;
+@property (nonatomic, strong) NSString *backgroundImage;
+
 @end
 
 @implementation ATTutorialController
@@ -74,18 +77,18 @@
     [self.window setTouchesDelegate:self];
     [self.window setMultipleTouchEnabled:YES];
     
-    // Adds a custom mapview with all types of pins
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_BackgroundTutorial.jpg"]];
-    [imageView setContentMode:UIViewContentModeScaleAspectFill];
-    [imageView setFrame:[self windowFrame]];
-    [self.window addSubview:imageView];
-    imageView = nil;
+    // Adds a custom background for the tutorial screen
+    self.backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.backgroundImage]];
+    [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.backgroundImageView setFrame:[self windowFrame]];
+    [self.window addSubview:self.backgroundImageView];
     
     // Add a background view to the tutorial
     self.backgroundView = [[UIView alloc] initWithFrame:[self windowFrame]];
     self.backgroundView.alpha = 0;
     [self.window addSubview:self.backgroundView];
     [self setUpMask];
+    
     return self.window;
 }
 
@@ -129,10 +132,7 @@
 }
 
 -(void)setUpForShow{
-    // Making reallyyyyyy sure :)
-    if(self.window == nil){
-        [self customInit];
-    }
+    [self customInit];
     
     self.backgroundView.alpha = 0;
     [self.window setMultipleTouchEnabled:YES];
@@ -207,8 +207,9 @@
     [self showTutorialWithFramesAndStringsBlock:framesAndStringsBlock];
 }
 
--(void)showTutorialWithFramesAndStringsBlock:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits{
+-(void)showTutorialWithFramesAndStringsAndBackgroundImage:(NSString *)background Block:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits{
     self.waitsForTouches = waits;
+    _backgroundImage = background;
     [self showTutorialWithFramesAndStringsBlock:framesAndStringsBlock completion:completion];
     
 }
