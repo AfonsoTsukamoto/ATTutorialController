@@ -14,7 +14,7 @@ This framework uses Facebooks shimmer view for the swipe message.
 
 ## Installation
 
-### Cocoapods:
+### CocoaPods:
 
 ATTutorialController is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
