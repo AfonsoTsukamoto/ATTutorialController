@@ -389,6 +389,10 @@
         self.backgroundView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.mainWindow makeKeyAndVisible];
+        [self.backgroundImageView removeFromSuperview];
+        self.backgroundImageView = nil;
+        [self.backgroundView removeFromSuperview];
+        self.backgroundView = nil;
         [self.window removeFromSuperview];
         self.window = nil;
         if(self.completionBlock != nil){
