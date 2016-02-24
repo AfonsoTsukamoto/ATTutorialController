@@ -13,6 +13,7 @@
 @interface ATTutorialController()<UIWindowTouchesProtocol>
 @property (nonatomic, strong) UIWindow *mainWindow;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) CAShapeLayer *mask;
 @property (nonatomic, strong) UILabel *tutorialLabel;
 @property (nonatomic, strong) FBShimmeringView *shimmerLabel;
@@ -27,6 +28,8 @@
 @property (nonatomic, readwrite) BOOL firstTouchForTutorialStart;
 @property (nonatomic, readwrite) BOOL waitsForTouches;
 @property (nonatomic, readwrite) BOOL hasLabelPosition;
+@property (nonatomic, strong) NSString *backgroundImage;
+
 @end
 
 @implementation ATTutorialController
@@ -74,11 +77,18 @@
     [self.window setTouchesDelegate:self];
     [self.window setMultipleTouchEnabled:YES];
     
+    // Adds a custom background for the tutorial screen
+    self.backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.backgroundImage]];
+    [self.backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.backgroundImageView setFrame:[self windowFrame]];
+    [self.window addSubview:self.backgroundImageView];
+    
     // Add a background view to the tutorial
     self.backgroundView = [[UIView alloc] initWithFrame:[self windowFrame]];
     self.backgroundView.alpha = 0;
     [self.window addSubview:self.backgroundView];
     [self setUpMask];
+    
     return self.window;
 }
 
@@ -94,8 +104,8 @@
 }
 
 -(UILabel *)labelForTutorialWithText:(NSString *)title{
-    UILabel *label = [[UILabel alloc]initWithFrame: self.hasLabelPosition ? self.labelPosition : CGRectMake(20.0, 300.0, 280.0, 100.0)];
-    [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:18.0]];
+    UILabel *label = [[UILabel alloc]initWithFrame: self.hasLabelPosition ? self.labelPosition : CGRectMake(30, ((self.window.frame.size.height) - 150.0), self.window.frame.size.width - 60, 100.0)]; // Vitor - Fixed label position
+    [label setFont:[UIFont fontWithName:@"Nexa Light" size:16.0]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor whiteColor]];
     [label setText:title];
@@ -106,11 +116,11 @@
 
 -(FBShimmeringView *)labelForTutorialSwipe{
     CGRect frame = (CGRect){
-        {20.0, ((self.window.frame.size.height) - (60.0 + 20.0))}, // 60 = height of the label. 20 is the margin to the bottom.
-        {280.0, 60.0}
+        {0, ((self.window.frame.size.height) - (60.0 + 15.0))}, // 60 = height of the label. 20 is the margin to the bottom.
+        {self.window.frame.size.width, 60.0} // Vitor - Fixed label position
     };
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    [label setFont:[UIFont fontWithName:@"Helvetica Neue" size:18.0]];
+    [label setFont:[UIFont fontWithName:@"Nexa Light" size:16.0]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor whiteColor]];
     [label setText:self.shimmerLabelText];
@@ -122,10 +132,7 @@
 }
 
 -(void)setUpForShow{
-    // Making reallyyyyyy sure :)
-    if(self.window == nil){
-        [self customInit];
-    }
+    [self customInit];
     
     self.backgroundView.alpha = 0;
     [self.window setMultipleTouchEnabled:YES];
@@ -200,8 +207,9 @@
     [self showTutorialWithFramesAndStringsBlock:framesAndStringsBlock];
 }
 
--(void)showTutorialWithFramesAndStringsBlock:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits{
+-(void)showTutorialWithFramesAndStringsAndBackgroundImage:(NSString *)background Block:(NSArray*(^)())framesAndStringsBlock completion:(void(^)())completion waitsForTouch:(BOOL)waits{
     self.waitsForTouches = waits;
+    _backgroundImage = background;
     [self showTutorialWithFramesAndStringsBlock:framesAndStringsBlock completion:completion];
     
 }
@@ -259,6 +267,8 @@
     
     self.shimmerLabel = [self labelForTutorialSwipe];
     [self.backgroundView addSubview:self.shimmerLabel];
+    
+    [self.tutorialLabel setNumberOfLines:0];
     
     CGFloat prevX = self.tutorialLabel.frame.origin.x;
     [self.tutorialLabel setFrame:(CGRect){
@@ -379,6 +389,10 @@
         self.backgroundView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.mainWindow makeKeyAndVisible];
+        [self.backgroundImageView removeFromSuperview];
+        self.backgroundImageView = nil;
+        [self.backgroundView removeFromSuperview];
+        self.backgroundView = nil;
         [self.window removeFromSuperview];
         self.window = nil;
         if(self.completionBlock != nil){
